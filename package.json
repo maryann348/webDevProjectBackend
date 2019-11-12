@@ -1,0 +1,29 @@
+{
+  "name": "restapisd208",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "keywords": [],
+  "author": "maryann",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.7.10",
+    "nodemon": "^1.19.4"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/maryann348/webDevProjectBackend.git"
+  },
+  "bugs": {
+    "url": "https://github.com/maryann348/webDevProjectBackend/issues"
+  },
+  "homepage": "https://github.com/maryann348/webDevProjectBackend#readme",
+  "description": ""
+}
