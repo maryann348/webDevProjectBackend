@@ -2,6 +2,12 @@ const mongoose = require("mongoose");
 
 //schema of a post
 const postSchema = mongoose.Schema({
+  userID: {
+    type: Object
+  },
+  imgID:{
+    type: Object
+  },
   title: {
     type: String,
     required: true
@@ -13,7 +19,21 @@ const postSchema = mongoose.Schema({
   date: {
     type: Date,
     default: Date.now
+  },
+  ratings: {
+    avgRating: {
+      type: Number,
+      default:0
+    },
+    totalRating: {
+      type: Number,
+      default:0
+    },
+    users: {
+      type: Number,
+      default:0
+    }
   }
 });
 
-module.exports = mongoose.model("Posts", postSchema);
+module.exports = mongoose.model("Post", postSchema);

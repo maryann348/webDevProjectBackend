@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Post = require("../models/PostSchema");
+const img = require("../models/imgSchema");
 
 //gets all posts from the database
 router.get("/", async (request, response) => {
@@ -24,6 +25,7 @@ router.get("/:postID", async (request, response) => {
 
 //Saves a new post
 router.post("/", async (request, response) => {
+  console.log(request.body)
   const post = new Post({
     title: request.body.title,
     description: request.body.description
@@ -59,5 +61,19 @@ router.patch("/:postID", async (request, response) => {
     response.json({ message: error });
   }
 });
+
+// router.post('/img',(req, res) =>{
+//   console.log(req.body.file)
+//   res.end()
+
+// })
+
+
+// router.post('/ratings', (req, res) =>{
+//   let userID = '5dd290c10c1b690c80888898'
+//   //let
+//   let post = new Post()
+// })
+
 
 module.exports = router;
