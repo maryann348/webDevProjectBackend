@@ -3,6 +3,7 @@ const app = express();
 const mongoose = require("mongoose");
 const postRoutes = require("./routes/posts");
 const userRoutes = require('./routes/user')
+const imgRoutes = require('./routes/images')
 const cors = require("cors");
 const multer = require('multer')
 require("dotenv/config");
@@ -12,7 +13,8 @@ const url = 'mongodb://localhost:27017/maryann'
 app.use(cors());
 app.use(express.json());
 app.use("/posts", postRoutes);
-app.use('/user', userRoutes )
+app.use('/uploads', imgRoutes);
+app.use('/user', userRoutes)
 
 //connect to the database
 mongoose.connect(
@@ -37,10 +39,11 @@ var upload = multer({ storage: storage });
 app.post('/posts/img', upload.single('photo'), (req, res, next) => {
   console.log('hello')
   //var img = fs.readFileSync(req.file.path);
- // console.log(req.file)
+  // console.log(req.file)
 })
 
 //listens to connections in port 3000
-app.listen(3000, () => {
-  console.log("Server listening on port 3000");
+port = 3000;
+app.listen(port, () => {
+  console.log("Server listening on port " + port);
 });

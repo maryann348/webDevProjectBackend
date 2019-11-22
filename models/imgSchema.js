@@ -1,11 +1,17 @@
 const mongoose = require("mongoose");
 
+
 const imgSchema = mongoose.Schema({
-    userID :{
-        type : Object,
-        required :true
-    },
+    // userID :{
+    //     type : Object,
+    //     required :true
+    // },
     imageURL:{
+        type: String,
+        default: "none",
+        required: true
+    },
+    imageDescription:{
         type: String,
         required: true
     },
