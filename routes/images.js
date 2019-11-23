@@ -1,7 +1,7 @@
 var express = require('express');
 var Image = require('../models/imgSchema');
 var ImageRouter = express.Router();
-const router = express.Router();
+// const router = express.Router();
 const multer = require('multer');
 const storage = multer.diskStorage({
     destination: function (req, file, cb){
