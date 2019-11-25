@@ -6,8 +6,11 @@ const userRoutes = require('./routes/user')
 const imgRoutes = require('./routes/images')
 const cors = require("cors");
 const multer = require('multer')
+const path = require('path');
+
 require("dotenv/config");
 const url = 'mongodb://localhost:27017/maryann'
+
 
 //middlewares
 app.use(cors());
@@ -15,6 +18,8 @@ app.use(express.json());
 app.use("/posts", postRoutes);
 app.use('/uploads', imgRoutes);
 app.use('/user', userRoutes)
+
+app.use(express.static('./images'));
 
 //connect to the database
 mongoose.connect(

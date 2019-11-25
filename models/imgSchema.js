@@ -6,30 +6,27 @@ const imgSchema = mongoose.Schema({
     //     type : Object,
     //     required :true
     // },
-    imageURL:{
+    imageURL: {
         type: String,
         default: "none",
         required: true
     },
-    imageDescription:{
+    imageDescription: {
         type: String,
-        required: true
+        // required: true
     },
-    created_at:{
+    created_at: {
         type: Date,
-        value: Date.now
     },
     edited_at: {
         type: Date,
-        value: Date.now
     },
-    deleted_at:{
+    deleted_at: {
         type: Date,
-        value: Date.now
     }
 });
 
-module.exports = mongoose.model('Image',imgSchema);
+module.exports = mongoose.model('Image', imgSchema);
 
 
 //pambutngi ni og CREATEDAT, EDITEDAT, DELETEDAT puro na timestamp and TYPE  kay DATE ang VALUE kay DATE.NO
