@@ -3,34 +3,58 @@ const router = express.Router();
 const fs = require("fs");
 const Post = require("../models/PostSchema");
 const img = require("../models/imgSchema");
-var picture = fs.readFileSync("./images");
-var newData =JSON.parse(picture);
+const avgRating = require("../models/avgRatingSchema");
+const rating = require("../models/ratingSchema");
 
 
-
-if(newData.rate == 0){
-  var ratings =(Number(newData.rate)+ Number(rate))
-  newData.rate = ratings;
-  fs.writeFile("./images", JSON.stringify(newData), function (err){
-    if(err) throw err;
-    console.log('sucessfully rated');
-  });
-  resizeBy.end(""+ newData.rate)
-  // if(err) throw err{
-  //   console.log('Successfully Rated');
-  // }
-
-
-}else{
-  var ratings = (Number(newData.rate) + Number(rate))
-  newData.rate = ratings;
-  newData.rate = Number(Number(newData.rate / 2).toFixed(2))
-  fs.writeFile("./images", JSON.stringify(newData), function(err){
-    if(err) throw err;
-    console.log('successfully rated');
-  });
-  resizeBy.end(""+newData.rate)
+module.exports = {
+  handler : function(req, res){
+    Rating.aggregate(
+      [
+        {'$group':{
+          '_id':'$imageId',
+          'avgRating' : {'$avg' : '$rating'}
+        }}
+      ],
+      function(err, image){
+        image = image.map(function(result){
+          return new avgRating(result);
+        });
+        img.populate(image,{'path' : '_id'}, function(err, image){
+          res({image:image});
+          console.log('sample',JSON.stringify(image, undefined,2));
+        });
+      }
+    )
+  }
 }
+// var picture = fs.readFileSync("./images");
+// var newData =JSON.parse(picture);
+
+// module.exports = function(req, res){
+// if(newData.rate == 0){
+//   var ratings =(Number(newData.rate)+ Number(rate))
+//   newData.rate = ratings;
+//   fs.writeFile("./images", JSON.stringify(newData), function (err){
+//     if(err) throw err;
+//     console.log('sucessfully rated');
+//   });
+//   resizeBy.end(""+ newData.rate)
+//   // if(err) throw err{
+//   //   console.log('Successfully Rated');
+//   // }
+
+
+// }else{
+//   var ratings = (Number(newData.rate) + Number(rate))
+//   newData.rate = ratings;
+//   newData.rate = Number(Number(newData.rate / 2).toFixed(2))
+//   fs.writeFile("./images", JSON.stringify(newData), function(err){
+//     if(err) throw err;
+//     console.log('successfully rated');
+//   });
+//   resizeBy.end(""+newData.rate)
+// }
 //gets all posts from the database
 // router.get("/", async (request, response) => {
 //   try {
@@ -106,5 +130,5 @@ if(newData.rate == 0){
 // function getRating(id){
 //   Product.aggregate
 // }
-
+// }
 module.exports = router;

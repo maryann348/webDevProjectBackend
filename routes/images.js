@@ -31,7 +31,7 @@ const upload = multer({
 ImageRouter.route("/uploadmulter")
 .post(upload.single('image'), (req, res, next) => {
     console.log(req.file);
-    console.log(req.file.filename);
+    // console.log(req.file.filename);
     if(!req.files){
         var file = fs.readFileSync(req.file.path);
         console.log(file)
@@ -42,7 +42,8 @@ ImageRouter.route("/uploadmulter")
     const newImage = new Image({
         imageURL: url,
         imageDescription: req.body.imageDescription,
-        created_at:new Date()
+        created_at:new Date(),
+        ratings : req.body.ratings,
     });
     newImage.save(
         (err,data) => {

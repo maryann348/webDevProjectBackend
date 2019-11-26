@@ -1,7 +1,8 @@
 const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
 
 
-const imgSchema = mongoose.Schema({
+const imgSchema = new Schema({
     // userID :{
     //     type : Object,
     //     required :true
@@ -23,7 +24,15 @@ const imgSchema = mongoose.Schema({
     },
     deleted_at: {
         type: Date,
-    }
+    },
+    ratings : {
+        type: Schema.Types.ObjectId,
+        ref : 'Rating'
+    },
+    rating : {
+        type : Number,
+        // required : true
+    },
 });
 
 module.exports = mongoose.model('Image', imgSchema);
