@@ -20,20 +20,25 @@ const postSchema = mongoose.Schema({
     type: Date,
     default: Date.now
   },
-  ratings: {
-    avgRating: {
-      type: Number,
-      default:0
-    },
-    totalRating: {
-      type: Number,
-      default:0
-    },
-    users: {
-      type: Number,
-      default:0
-    }
+  rating: {
+    type: Number,
+    default: 0
+    // required: true
   }
+  // ratings: {
+  //   avgRating: {
+  //     type: Number,
+  //     default:0
+  //   },
+  //   totalRating: {
+  //     type: Number,
+  //     default:0
+  //   },
+  //   users: {
+  //     type: Number,
+  //     default:0
+  //   }
+  // }
 });
 
 module.exports = mongoose.model("Post", postSchema);

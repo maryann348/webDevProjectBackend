@@ -52,20 +52,20 @@ router.post('/register', (req, res) => {
 
 });
 
-router.post('/dashboard', (req, res) => {
+// router.post('/dashboard', (req, res) => {
 
-    //ibutang diri ang token gkan sa front end na naka save sa local storage
-    let code = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZGQyOTBjMTBjMWI2OTBjODA4ODg4OTgiLCJpYXQiOjE1NzQwODExNTIsImV4cCI6MTU3NDE2NzU1Mn0.uvu1u1yJEy2LlbNqRMPdddUOygSeuwE0MhuR_KUFmrY"
-    let token = jwt.decode(code)
-    User.findOne({ _id: token._id })
-        .then((doc) => {
-            if (doc) {
-                res.status(200).json({ data: doc })
-            }
-        })
-        .catch(err => {
-            res.status(400).json({ message: err.message })
-        })
-})
+//     //ibutang diri ang token gkan sa front end na naka save sa local storage
+//     let code = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZGQyOTBjMTBjMWI2OTBjODA4ODg4OTgiLCJpYXQiOjE1NzQwODExNTIsImV4cCI6MTU3NDE2NzU1Mn0.uvu1u1yJEy2LlbNqRMPdddUOygSeuwE0MhuR_KUFmrY"
+//     let token = jwt.decode(code)
+//     User.findOne({ _id: token._id })
+//         .then((doc) => {
+//             if (doc) {
+//                 res.status(200).json({ data: doc })
+//             }
+//         })
+//         .catch(err => {
+//             res.status(400).json({ message: err.message })
+//         })
+// })
 
 module.exports = router
