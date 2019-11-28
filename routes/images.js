@@ -22,54 +22,22 @@ const fileFilter = (req, file, cb) => {
 
 const upload = multer({
     storage: storage,
-    limits: {   
-        fieldSize: 100000000
-    },
+    // limits: {   
+    //     fieldSize: 1024 * 1024 * 5
+    // },
     fileFilter: fileFilter
 });
 //saves images to database
 ImageRouter.route("/uploadmulter")
-.post(upload.array('image'), (req, res, next) => {
+.post(upload.single('image'), (req, res, next) => {
     console.log(req.file);
-    // console.log(req.file.filename);
-    const img = req.files;
-    if(!img){
-        console.log(err);
-        res.send(err);
-    }else{
-        img.map(image => {
-            let url = 'http://localhost:3000/'+image.filename;
-            // var new_img = new Image({name: image.filename, url:url})
-            const newImage = new Image({
-                imageURL: url,
-                imageDescription: req.body.imageDescription,
-                created_at:new Date()
-            });
-            // const newImage = new Image({
-            //     imageURL: url,
-            //     imageDescription: req.body.imageDescription,
-            //     created_at:new Date()
-            // });
-            newImage.save(
-                (err,data) => {
-                    if(err){
-                        console.log(err);
-                        res.send(err)
-                    }
-                    else{
-                        console.log(data);
-                        res.send(data)
-                    }
-                }
-            )
-        })
+    console.log(req.file.filename);
+    if(!req.files){
+        var file = fs.readFileSync(req.file.path);
+        console.log(file)
+        // var encode_image = file.toString('base64');
     }
-    // if(!req.files){
-    //     var file = fs.readFileSync(req.file.path);
-    //     console.log(file)
-    //     // var encode_image = file.toString('base64');
-    // }
-    // let url = 'http://localhost:3000/'+req.file.filename;
+    let url = 'http://localhost:3000/'+req.file.filename;
 
     const newImage = new Image({
         imageURL: url,
@@ -138,24 +106,23 @@ ImageRouter.get('/post', function(req, res) {
     // })
     .sort({created_at: 'desc'});
 });
-
-    ImageRouter.get('/Image/:id',(req, res) => {
-        picture.Image.find({})
-        .populate('userId')
-        .exec((err, data) => {
-            if (err || !data.length){
-                res.send(err);
+ImageRouter.get('/Image/:id',(req, res) => {
+    picture.Image.find({})
+    .populate('userId')
+    .exec((err, data) => {
+        if (err || !data.length){
+            res.send(err);
+        }
+        let pictures =[]
+        data.forEach(element => {
+            if(element.userId._id == req.params.id){
+                pictures.push(element)
             }
-            let pictures =[]
-            data.forEach(element => {
-                if(element.userId._id == req.params.id){
-                    pictures.push(element)
-                }
-                
-            });
-            res.send(pictures)
-        })
+            
+        });
+        res.send(pictures)
     })
+})
 // ImageRouter.post('/display', function (req, res){
 //     var data ={
 //         file: req.body.fileData,

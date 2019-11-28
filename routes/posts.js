@@ -16,9 +16,9 @@ const img = require("../models/imgSchema");
 //     console.log('sucessfully rated');
 //   });
 //   resizeBy.end(""+ newData.rate)
-  // if(err) throw err{
-  //   console.log('Successfully Rated');
-  // }
+//   // if(err) throw err{
+//   //   console.log('Successfully Rated');
+//   // }
 
 
 // }else{
@@ -106,5 +106,5 @@ const img = require("../models/imgSchema");
 // function getRating(id){
 //   Product.aggregate
 // }
-
+// }
 module.exports = router;
