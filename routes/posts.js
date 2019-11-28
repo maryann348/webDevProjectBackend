@@ -3,34 +3,34 @@ const router = express.Router();
 const fs = require("fs");
 const Post = require("../models/PostSchema");
 const img = require("../models/imgSchema");
-var picture = fs.readFileSync("./images");
-var newData =JSON.parse(picture);
+// var picture = fs.readFileSync("./images");
+// var newData =JSON.parse(picture);
 
 
 
-if(newData.rate == 0){
-  var ratings =(Number(newData.rate)+ Number(rate))
-  newData.rate = ratings;
-  fs.writeFile("./images", JSON.stringify(newData), function (err){
-    if(err) throw err;
-    console.log('sucessfully rated');
-  });
-  resizeBy.end(""+ newData.rate)
+// if(newData.rate == 0){
+//   var ratings =(Number(newData.rate)+ Number(rate))
+//   newData.rate = ratings;
+//   fs.writeFile("./images", JSON.stringify(newData), function (err){
+//     if(err) throw err;
+//     console.log('sucessfully rated');
+//   });
+//   resizeBy.end(""+ newData.rate)
   // if(err) throw err{
   //   console.log('Successfully Rated');
   // }
 
 
-}else{
-  var ratings = (Number(newData.rate) + Number(rate))
-  newData.rate = ratings;
-  newData.rate = Number(Number(newData.rate / 2).toFixed(2))
-  fs.writeFile("./images", JSON.stringify(newData), function(err){
-    if(err) throw err;
-    console.log('successfully rated');
-  });
-  resizeBy.end(""+newData.rate)
-}
+// }else{
+//   var ratings = (Number(newData.rate) + Number(rate))
+//   newData.rate = ratings;
+//   newData.rate = Number(Number(newData.rate / 2).toFixed(2))
+//   fs.writeFile("./images", JSON.stringify(newData), function(err){
+//     if(err) throw err;
+//     console.log('successfully rated');
+//   });
+//   resizeBy.end(""+newData.rate)
+// }
 //gets all posts from the database
 // router.get("/", async (request, response) => {
 //   try {

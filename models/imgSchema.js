@@ -2,10 +2,10 @@ const mongoose = require("mongoose");
 
 
 const imgSchema = mongoose.Schema({
-    // userID :{
-    //     type : Object,
-    //     required :true
-    // },
+    userId :{
+        type : Object,
+        required :true
+    },
     imageURL: {
         type: String,
         default: "none",
