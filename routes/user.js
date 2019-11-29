@@ -9,6 +9,7 @@ const saltRounds = 10;
 router.use(bodyParser.urlencoded({ extended: false }));
 router.use(bodyParser.json());
 
+//Login Router
 router.post('/login', (req, res) => {
     // console.log(req.body)
     var email = req.body.Email
@@ -63,6 +64,7 @@ router.post('/login', (req, res) => {
 //         })
 // });
 
+//registration router
 router.post('/register', (req, res) => {
     let user = new User(req.body);
     user.Password = bcrypt.hashSync(user.Password, saltRounds);
