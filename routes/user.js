@@ -112,6 +112,11 @@ router.post('/register', (req, res) => {
 //         });
 
 });
+    //use validation
+        router.post('/validateEmail' , (req, res) => {
+            User.findOne({Email : req.body.Email})
+            .then(User => User ? res.sendStatus(204): res.sendStatus(200))
+        });
 // router.post('/getUser', function(re))
 
 // router.post('/dashboard', (req, res) => {
