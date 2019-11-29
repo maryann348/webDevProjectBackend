@@ -42,6 +42,20 @@ router.post('/login', (req, res) => {
                 })
     })
 })
+
+    router.get('/getUser', function(req, res){
+        let email = req.body.Email
+        User.findOne({ Email : email }, function(err,data){
+            if(err){
+                res.send(err)
+            }
+            if(data == null){
+                res.status(404).json({ message: 'User not found' })
+            }else {
+                res.status(200).json({message: 'success',user: data, auth: true})
+            }
+        })
+    })
 //         .then(doc => {
 //             if (doc) {
 //                 var token = jwt.sign({
