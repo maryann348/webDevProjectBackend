@@ -41,11 +41,11 @@ var storage = multer.diskStorage({
 
 var upload = multer({ storage: storage });
 
-app.post('/posts/img', upload.single('photo'), (req, res, next) => {
-  console.log('hello')
-  //var img = fs.readFileSync(req.file.path);
-  // console.log(req.file)
-})
+// app.post('/posts/img', upload.single('photo'), (req, res, next) => {
+//   console.log('hello')
+//   //var img = fs.readFileSync(req.file.path);
+//   // console.log(req.file)
+// })
 
 //listens to connections in port 3000
 port = 3000;

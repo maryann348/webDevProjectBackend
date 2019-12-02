@@ -79,6 +79,13 @@ router.post('/register', (req, res) => {
             })
         }
     });
+
+
+    // //username validation
+    // router.post('/validateEmail', (req, res) => {
+    //     User.findOne({ Email : req.body.Email })
+    //     .then()
+    // })
 //         .then(() => {
 //             // res.status(200).json({message:'Successfully saved'});
 //             var token = jwt.sign({
