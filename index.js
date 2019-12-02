@@ -47,8 +47,8 @@ var upload = multer({ storage: storage });
 //   // console.log(req.file)
 // })
 
-//listens to connections in port 3000
-port = 3000;
+//listens to connections in port 4000
+port = 4000;
 app.listen(port, () => {
   console.log("Server listening on port " + port);
 });
