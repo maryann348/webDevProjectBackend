@@ -105,6 +105,33 @@ router.use(bodyParser.json());
                         })
             })
         });
+        // router.post("/login", (req, res) => {
+        //     User.findOne({ Email: req.body.Email })
+        //       .then(user => {
+        //         console.log("User from login", user)
+        //         // if (!user) res.sendStatus(204);
+        //         if (user) {
+        //           var match = bcrypt.compare(req.body.Password, user.Password)
+        //           if (match) {
+        //             var acc_token = jwt.sign({ user }, "token1234", { expiresIn: "12h" })
+        //             res.send({
+        //               status: true,
+        //               auth: true,
+        //               user: user,
+        //               token: acc_token
+        //             })
+        //             res.sendStatus(200)
+        //           }
+        //           else {
+        //             res.sendStatus(204)
+        //           }
+        //           // .then(passwordMatch => passwordMatch ? res.sendStatus(200) : res.sendStatus(204))
+        //         }
+        //         else {
+        //           res.sendStatus(204);
+        //         }
+        //       })
+        //   });
 //     User.findOne({ Email: email }, function (err, data) {
 //         if (err) {
 //             res.send(err)
@@ -149,15 +176,19 @@ router.use(bodyParser.json());
 //         }
 //     })
 // })
-    router.get('/getUser', (req, res) => {
-        User.findOne(req.body.Email, (err, User) => {
-            if(err){
-                res.send(err)
-            }else {
-                res.send(User)
-            }
-        })
+    router.get('/getUser/:Email', (req, res) => {
+        User.findOne({ Email: req.params.Email })
+    .then(data => {
+      res.send(data)
+      console.log(data);
+      
     })
+    .catch(error => {
+      res.send(error)
+      console.log(error);
+      
+    })
+});
 //         .then(doc => {
 //             if (doc) {
 //                 var token = jwt.sign({
