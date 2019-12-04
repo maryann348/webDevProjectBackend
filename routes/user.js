@@ -181,42 +181,7 @@ router.use(bodyParser.json());
 
 //registration router
 router.post('/register', (req, res) => {
-<<<<<<< HEAD
-    let user = new User(req.body);
-    user.Password = bcrypt.hashSync(user.Password, saltRounds);
-    // console.log(req.body)
-    user.save(function(err, resp){
-        if (err) {
-            res.send(err)
-        }else {
-            res.send({
-                sms: "Successfully Saved",
-                user: resp
-            })
-        }
-    });
-
-
-    // //username validation
-    // router.post('/validateEmail', (req, res) => {
-    //     User.findOne({ Email : req.body.Email })
-    //     .then()
-    // })
-//         .then(() => {
-//             // res.status(200).json({message:'Successfully saved'});
-//             var token = jwt.sign({
-//                 _id: user._id,
-//             }, config.secret, {
-//                     expiresIn: 86400
-//                 });
-//             res.status(200).json({
-//                 auth: true,
-//                 token: token
-//             });
-//             console.log('saved')
-=======
     console.log(req);
->>>>>>> f3bec16f62f74a2dead90a72b7419f49f832e9f7
 
     let newUser = new User(req.body.data);
     // user.Password = bcrypt.hashSync(user.Password, saltRounds);
