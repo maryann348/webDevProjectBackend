@@ -37,7 +37,7 @@ ImageRouter.route("/uploadmulter")
         console.log(file)
         // var encode_image = file.toString('base64');
     }
-    let url = 'http://localhost:3000/'+req.file.filename;
+    let url = 'http://localhost:4000/'+req.file.filename;
 
     const newImage = new Image({
         imageURL: url,
