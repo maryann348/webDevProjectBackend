@@ -12,6 +12,10 @@ const imgSchema = new Schema({
         default: "none",
         required: true
     },
+    imageData : {
+        type : String,
+        required : true
+    },
     imageDescription: {
         type: String,
         // required: true

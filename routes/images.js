@@ -31,7 +31,8 @@ const upload = multer({
 ImageRouter.route("/uploadmulter")
 .post(upload.single('image'), (req, res, next) => {
     console.log(req.file);
-    console.log(req.file.filename);
+    // console.log(req.file.filename);
+    // const newImage = new Image({})
     if(!req.files){
         var file = fs.readFileSync(req.file.path);
         console.log(file)
@@ -41,30 +42,32 @@ ImageRouter.route("/uploadmulter")
 
     const newImage = new Image({
         imageURL: url,
+        imageData : req.file.path,
         imageDescription: req.body.imageDescription,
         created_at:new Date()
     });
-    newImage.save(
-        (err,data) => {
-            if(err){
-                console.log(err);
-                res.send(err)
-            }
-            else{
-                console.log(data);
-                res.send(data)
-            }
-        }
-    )
-    // .then((result)=>{
-    //     console.log(result);
-    //     res.status(200).json({
-    //         success: true,
-    //         document: result
-    //     });
-    // })
-    // .catch((err) => next(err));
+    newImage.save()
+    //     (err,data) => {
+    //         if(err){
+    //             console.log(err);
+    //             res.send(err)
+    //         }
+    //         else{
+    //             console.log(data);
+    //             res.send(data)
+    //         }
+    //     }
+    // )
+    .then((result)=>{
+        console.log(result);
+        res.status(200).json({
+            success: true,
+            document: result
+        });
+    })
+    .catch((err) => next(err));
 });
+// });
 //retrieve images
 // ImageRouter.get('images/:filename', function(req,res){
 //     console.log(req.params.filename)
