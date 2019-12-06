@@ -30,12 +30,10 @@ const upload = multer({
 //saves images to database
 ImageRouter.route("/uploadmulter")
 .post(upload.single('image'), (req, res, next) => {
-    console.log(req.file);
     // console.log(req.file.filename);
     // const newImage = new Image({})
     if(!req.files){
         var file = fs.readFileSync(req.file.path);
-        console.log(file)
         // var encode_image = file.toString('base64');
     }
     let url = 'http://localhost:4000/'+req.file.filename;
@@ -48,7 +46,7 @@ ImageRouter.route("/uploadmulter")
     });
     newImage.save()
     //     (err,data) => {
-    //         if(err){
+    //         if(err){`
     //             console.log(err);
     //             res.send(err)
     //         }
