@@ -9,206 +9,53 @@ const saltRounds = 10;
 router.use(bodyParser.urlencoded({ extended: false }));
 router.use(bodyParser.json());
 
-//Login Router
-// router.post('/login', (req, res) => {
-//     console.log(req.body)
-//     // var email = req.body.Email
-//     // var pass = req.body.Password
-//     User.findOne({ Email: req.body.Email })
-//     .then(user => {
-//         console.log("User from login", User)
-//         if (!User) res.sendStatus(204);
-//         else {
-//             bcrypt.compare(req.body.Password, User.Password)
-//                 .then(passwordMatch => passwordMatch ? res.sendStatus(200) : res.sendStatus(204))
-//         }
-//     })
-        // { Email : req.body.Email},
-        // (err,data) => {
-        //     if(err){
-        //         console.log(err);
-        //         return res.status(404).send({
-        //             data:null,
-        //             auth:false,
-        //             message:"Username Not Found!"
-        //         })              
-        //     }
-        //     else{
-        //         bcrypt.compare(
-        //             req.body.Password,
-        //              (err,match) => {
-        //                  if(err || !match){
-        //                      console.log(err);
-        //                      return res.status(404).send({
-        //                         data:null,
-        //                         auth:false,
-        //                         message:"Invalid Password!"
-        //                      })
-        //                  }
-        //                  else{
-        //                     return res.status(200).send({
-        //                         data:data,
-        //                         auth:true,
-        //                         message:"Correct Combination!"
-        //                      })
-        //                  }
-        //              })
-        //     }
-        // }
-        // )
-        // .catch(err => {
-        //     return res.status(500).send({`
-        //         data:err,
-        //         message:"Service Unavailable!"
-        //      })
-        // })
-        // .then(User => {
-        //     console.log("user from login", User);
-        //     if(!User) res.sendStatus(204);
-        //     else {
-        //         bcrypt.compare(req.body.Password, User.Password)
-        //             .then(passwordMatch => passwordMatch ? res.sendStatus(200) : res.sendStatus(204)) 
-        //     }
-        
-            
-        // });
         router.post('/login', (req, res) => {
             // console.log(req.body)
             var email = req.body.Email
             var pass = req.body.Password
             User.findOne({ Email: email }, function(err, data){
                 if (err){
-                    res.send(err)
+                    return res.send(err)
                 }
                 if(data != null){
                     var match = bcrypt.compareSync(pass, data.Password)
                         if(match){
                             var acc_token = jwt.sign({ data },"token1234", {expiresIn: "12h"})
-                            res.send({
+                            return res.send({
                                 status: true,
                                 auth: true,
                                 user: data,
                                 token: acc_token
                             })
                         }else{
-                            res.send({
+                            return res.send({
                                 status: false,
                                 auth: false,
                                 sms: "Incorrect Password!!"
                             })
                         }
                     }
-                        res.send({
+                    return res.send({
                             status: false,
                             auth: false,
                             sms: "Username not found!!"
                         })
             })
         });
-        // router.post("/login", (req, res) => {
-        //     User.findOne({ Email: req.body.Email })
-        //       .then(user => {
-        //         console.log("User from login", user)
-        //         // if (!user) res.sendStatus(204);
-        //         if (user) {
-        //           var match = bcrypt.compare(req.body.Password, user.Password)
-        //           if (match) {
-        //             var acc_token = jwt.sign({ user }, "token1234", { expiresIn: "12h" })
-        //             res.send({
-        //               status: true,
-        //               auth: true,
-        //               user: user,
-        //               token: acc_token
-        //             })
-        //             res.sendStatus(200)
-        //           }
-        //           else {
-        //             res.sendStatus(204)
-        //           }
-        //           // .then(passwordMatch => passwordMatch ? res.sendStatus(200) : res.sendStatus(204))
-        //         }
-        //         else {
-        //           res.sendStatus(204);
-        //         }
-        //       })
-        //   });
-//     User.findOne({ Email: email }, function (err, data) {
-//         if (err) {
-//             res.send(err)
-//         }
-//         if (data != null) {
-//             var match = bcrypt.compareSync(pass, data.Password)
-//             if (match) {
-//                 var acc_token = jwt.sign({ data }, "token1234", { expiresIn: "12h" })
-//                 res.send({
-//                     status: true,
-//                     auth: true,
-//                     user: data,
-//                     token: acc_token
-//                 })
-//             } else {
-//                 res.send({
-//                     status: false,
-//                     auth: false,
-//                     sms: "Incorrect Password!!"
-//                 })
-//             }
-//         }
-//         res.send({
-//             status: false,
-//             auth: false,
-//             sms: "Username not found!!"
-//         })
-//     })
-// })
-
-// router.get('/getUser', function (req, res) {
-//     console.log(req)
-//     let email = req.body.Email
-//     User.findOne({ Email: email }, function (err, data) {
-//         if (err) {
-//             res.send(err)
-//         }
-//         if (data == null) {
-//             res.status(404).json({ message: 'User not found' })
-//         } else {
-//             res.status(200).json({ message: 'success', user: data, auth: true })
-//         }
-//     })
-// })
     router.get('/getUser/:Email', (req, res) => {
         User.findOne({ Email: req.params.Email })
     .then(data => {
-      res.send(data)
+        return res.send(data)
       console.log(data);
       
     })
     .catch(error => {
-      res.send(error)
+        return res.send(error)
       console.log(error);
       
     })
 });
-//         .then(doc => {
-//             if (doc) {
-//                 var token = jwt.sign({
-//                     _id: doc._id,
-//                 }, config.secret, {
-//                         expiresIn: 86400
-//                     });
-//                 res.status(200).json({
-//                     auth: true,
-//                     token: token
-//                 });
 
-//             } else {
-//                 res.status(404).json({ message: 'User not found' })
-//             }
-//         })
-//         .catch(err => {
-//             res.status(400).json({ message: err.message })
-//         })
-// });
 
 //registration router
 router.post('/register', (req, res) => {

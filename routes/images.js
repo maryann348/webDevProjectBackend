@@ -65,21 +65,7 @@ ImageRouter.route("/uploadmulter")
     })
     .catch((err) => next(err));
 });
-// });
-//retrieve images
-// ImageRouter.get('images/:filename', function(req,res){
-//     console.log(req.params.filename)
-//     let file = _dirname+'/images' + req.params.filename;
-//     res.sendFile(file);
-// })
 ImageRouter.get('/post', function(req, res) {
-    // try{
-        // var dataGet ={_id: req.params.i}
-    //     res.json(dataGet);
-    // }catch (err){
-    //     res.json({message : err});
-    // }
-    
     Image.find({},
         (err,data) => {
             if(err){
@@ -92,19 +78,6 @@ ImageRouter.get('/post', function(req, res) {
             }
         }
         )
-    //     .exec(function (err, doc){
-    //     if(err){
-    //         return next(err)
-    //     }
-    //     // var base64data = new Buffer(doc.fileData, 'binary').toString('base64');
-    //     // var res = {
-    //     //     fileData: base64data,
-    //     //     mime: doc.mimetype,
-    //     //     name: doc.fileName
-    //     // }
-    //     res.contentType('json');
-    //     res.send(doc)
-    // })
     .sort({created_at: 'desc'});
 });
 ImageRouter.get('/Image/:id',(req, res) => {
@@ -124,15 +97,5 @@ ImageRouter.get('/Image/:id',(req, res) => {
         res.send(pictures)
     })
 })
-// ImageRouter.post('/display', function (req, res){
-//     var data ={
-//         file: req.body.fileData,
-//         mime: req.body.mime,
-//         name: req.body.name
-//     }
-//     res.json(data)
-// })
-
-
 
 module.exports = ImageRouter
