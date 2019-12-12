@@ -38,10 +38,11 @@ ImageRouter.route("/uploadmulter")
             // var encode_image = file.toString('base64');
         }
         let url = 'http://localhost:4000/' + req.file.filename;
-        console.log(mongoose.Types.ObjectId(req.body.user),);
+        console.log(mongoose.Types.ObjectId(req.body.user), );
         const newImage = new Image({
-            userId : mongoose.Types.ObjectId(req.body.user),
+            userId: mongoose.Types.ObjectId(req.body.user),
             imageURL: url,
+            user: req.body.user,
             imageData: req.file.path,
             imageDescription: req.body.imageDescription,
             created_at: new Date()
@@ -63,8 +64,8 @@ ImageRouter.route("/uploadmulter")
 //     res.sendFile(file);
 // })
 ImageRouter.get('/post/:query', function (req, res) {
-    
-    Image.find({}).populate('userId')
+    var query  =req.params.query !== 'null'? {user:req.params.query}:{}    
+    Image.find(query).populate('userId')
         .sort({
             created_at: 'desc'
         }).then(

@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 require("./RegisterSchema")
 const imgSchema = new Schema({
+    user:String,
     userId :{
         type : Schema.Types.ObjectId,
         ref: 'User'
