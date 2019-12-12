@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-
+require("./PostSchema")
 const UserSchema = mongoose.Schema({
     FirstName: {
         type: String,
@@ -25,6 +25,15 @@ const UserSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    Birthdate: { month: String, day: Number, year: Number },
+    posts: {
+        type: [mongoose.Types.ObjectId],
+        ref: "Post",
+        default: []
+    },
+    Birthdate: {
+        month: String,
+        day: Number,
+        year: Number
+    },
 });
 module.exports = mongoose.model("User", UserSchema);

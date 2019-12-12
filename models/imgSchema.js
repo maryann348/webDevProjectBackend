@@ -30,13 +30,13 @@ const imgSchema = new Schema({
         type: Date,
     },
     ratings : {
-        type: Schema.Types.ObjectId,
-        ref : 'Rating'
+        type: [{
+            user:String,
+            rate:Number
+        }],
+        default:[]
     },
-    rating : {
-        type : Number,
-        // required : true
-    },
+
 });
 
 module.exports = mongoose.model('Image', imgSchema);

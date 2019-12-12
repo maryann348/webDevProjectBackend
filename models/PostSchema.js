@@ -1,12 +1,12 @@
 const mongoose = require("mongoose");
-
+require("./RegisterSchema")
 //schema of a post
 const postSchema = mongoose.Schema({
   userID: {
-    type: Object
-  },
-  imgID:{
-    type: Object
+    type: mongoose.Types.ObjectId,
+    ref: "User",
+    required: true
+
   },
   title: {
     type: String,
@@ -24,7 +24,7 @@ const postSchema = mongoose.Schema({
     type: Number,
     default: 0
     // required: true
-  }
+  },
   // ratings: {
   //   avgRating: {
   //     type: Number,

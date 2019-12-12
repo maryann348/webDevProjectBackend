@@ -23,8 +23,12 @@ app.use(express.static('./images'));
 
 //connect to the database
 mongoose.connect(
-  url,
-  { useUnifiedTopology: true, useNewUrlParser: true },
+  url, {
+    useUnifiedTopology: true,
+    useNewUrlParser: true,
+    useFindAndModify: true,
+    useCreateIndex: true
+  },
   () => {
     console.log("Connected to database");
   }
@@ -39,7 +43,9 @@ var storage = multer.diskStorage({
   }
 });
 
-var upload = multer({ storage: storage });
+var upload = multer({
+  storage: storage
+});
 
 // app.post('/posts/img', upload.single('photo'), (req, res, next) => {
 //   console.log('hello')
