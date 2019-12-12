@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-
-
+require("./RegisterSchema")
 const imgSchema = new Schema({
     userId :{
         type : Schema.Types.ObjectId,

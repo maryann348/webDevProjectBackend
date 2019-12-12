@@ -1,6 +1,7 @@
 var express = require('express');
 var Image = require('../models/imgSchema');
 var ImageRouter = express.Router();
+var mongoose = require("mongoose")
 // const router = express.Router();
 const multer = require('multer');
 const fs = require('fs');
@@ -37,25 +38,15 @@ ImageRouter.route("/uploadmulter")
             // var encode_image = file.toString('base64');
         }
         let url = 'http://localhost:4000/' + req.file.filename;
-
+        console.log(mongoose.Types.ObjectId(req.body.user),);
         const newImage = new Image({
+            userId : mongoose.Types.ObjectId(req.body.user),
             imageURL: url,
             imageData: req.file.path,
             imageDescription: req.body.imageDescription,
             created_at: new Date()
         });
         newImage.save()
-            //     (err,data) => {
-            //         if(err){`
-            //             console.log(err);
-            //             res.send(err)
-            //         }
-            //         else{
-            //             console.log(data);
-            //             res.send(data)
-            //         }
-            //     }
-            // )
             .then((result) => {
                 res.status(200).json({
                     success: true,
@@ -71,22 +62,19 @@ ImageRouter.route("/uploadmulter")
 //     let file = _dirname+'/images' + req.params.filename;
 //     res.sendFile(file);
 // })
-ImageRouter.get('/post', function (req, res) {
-
-
-    Image.find({},
+ImageRouter.get('/post/:query', function (req, res) {
+    
+    Image.find({}).populate('userId')
+        .sort({
+            created_at: 'desc'
+        }).then(
             (err, data) => {
                 if (err) {
                     res.send(err)
                 } else {
                     res.send(data)
                 }
-            }
-        )
-
-        .sort({
-            created_at: 'desc'
-        });
+            })
 });
 ImageRouter.get('/Image/:id', (req, res) => {
     Image.find({
